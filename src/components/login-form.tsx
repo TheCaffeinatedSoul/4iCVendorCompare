@@ -37,7 +37,7 @@ export const LoginForm = () => {
   const onSubmit = (data: z.infer<typeof loginSchema>) => {
     if (
       data.EMAIL_ID === "aaditya.v@4iapps.com" &&
-      data.PASSWORD === "abcd1234"
+      data.PASSWORD === "Test@123"
     ) {
       Cookies.set("NAME", "Aaditya");
       navigate({

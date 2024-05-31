@@ -19,16 +19,21 @@ function Overview() {
   );
   return (
     <div className="flex flex-col w-full p-8">
-      <div className="flex p-2 gap-4 items-center">
-        <div
-          className="flex gap-2 cursor-pointer pr-4 border-r-2"
-          onClick={() => navigate({ to: "/compare" })}
-        >
-          <TiArrowBack /> <div className="text-sm">Go Back</div>
-        </div>
+      <div className="flex p-2 gap-4 items-center justify-between">
+        <div className="flex gap-4 items-center">
+          <div
+            className="flex gap-2 cursor-pointer pr-4 border-r-2"
+            onClick={() => navigate({ to: "/compare" })}
+          >
+            <TiArrowBack /> <div className="text-sm">Go Back</div>
+          </div>
 
-        <div className="flex justify-center font-bold text-xl">
-          Overview of {vendorData?.vendorName}
+          <div className="flex justify-center font-bold text-xl">
+            Overview of {vendorData?.vendorName}
+          </div>
+        </div>
+        <div>
+          <img src={vendorData?.logoPath} alt="logo" width={"50vw"} />
         </div>
       </div>
       <div className="flex justify-evenly gap-20 p-2">
@@ -60,6 +65,18 @@ function Overview() {
           <TableRow>
             <TableHead>Delivery model</TableHead>
             <TableCell>{vendorData?.delModel}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableHead>Rating</TableHead>
+            <TableCell>{vendorData?.rating}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableHead>Milestone</TableHead>
+            <TableCell>{vendorData?.milestone}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableHead>Location</TableHead>
+            <TableCell>{vendorData?.location}</TableCell>
           </TableRow>
         </Table>
         <div

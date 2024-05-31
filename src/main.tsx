@@ -6,6 +6,8 @@ import "@/styles/global.css";
 
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 
 // Create a new router instance
 const router = createRouter({ routeTree });
@@ -23,7 +25,9 @@ if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <StrictMode>
-      <RouterProvider router={router} />
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
     </StrictMode>
   );
 }

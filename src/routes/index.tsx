@@ -7,6 +7,10 @@ export const Route = createFileRoute("/")({
       throw redirect({
         to: "/home",
       });
+    } else {
+      throw redirect({
+        to: "/login",
+      });
     }
   },
 });

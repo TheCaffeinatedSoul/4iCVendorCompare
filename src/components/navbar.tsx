@@ -28,7 +28,7 @@ export const Navbar = () => {
         onClick={() => navigate({ to: "/compare" })}
         className="cursor-pointer"
       />
-      <b>Vendor Compare Tool</b>
+      <b>AI Procurement Evaluation</b>
       <div className="flex items-center gap-4">
         <Searchbar />
         <div>
