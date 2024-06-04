@@ -39,10 +39,10 @@ export const FieldsSelector = () => {
   };
 
   return (
-    <div>
-      <ToggleGroup type="single" className="p-1">
+    <div className="flex flex-col gap-2">
+      <ToggleGroup type="single" className="p-1 gap-2">
         <Toggle
-          className="flex justify-evenly gap-1 hover:text-black"
+          className="flex justify-evenly gap-1 data-[state=on]:text-[#5B5FC7]"
           variant={"outline"}
           value="Company Strength"
           onClick={() => handleToggle("Company Strength")}
@@ -52,7 +52,7 @@ export const FieldsSelector = () => {
           Company Strength
         </Toggle>
         <Toggle
-          className="flex justify-evenly gap-1 hover:text-black"
+          className="flex justify-evenly gap-1 data-[state=on]:text-[#5B5FC7]"
           variant={"outline"}
           value="Experience"
           onClick={() => handleToggle("Experience")}
@@ -62,7 +62,7 @@ export const FieldsSelector = () => {
           Experience
         </Toggle>
         <Toggle
-          className="flex justify-evenly gap-1 hover:text-black"
+          className="flex justify-evenly gap-1 data-[state=on]:text-[#5B5FC7]"
           variant={"outline"}
           value="Commercials (USD)"
           onClick={() => handleToggle("Commercials (USD)")}
@@ -72,7 +72,7 @@ export const FieldsSelector = () => {
           Commercials (USD)
         </Toggle>
         <Toggle
-          className="flex justify-evenly gap-1 hover:text-black"
+          className="flex justify-evenly gap-1 data-[state=on]:text-[#5B5FC7]"
           variant={"outline"}
           value="Project Duration"
           onClick={() => handleToggle("Project Duration")}
@@ -82,7 +82,7 @@ export const FieldsSelector = () => {
           Project Duration
         </Toggle>
         <Toggle
-          className="flex justify-evenly gap-1 hover:text-black"
+          className="flex justify-evenly gap-1 data-[state=on]:text-[#5B5FC7]"
           variant={"outline"}
           value="Project Efforts"
           onClick={() => handleToggle("Project Efforts")}
@@ -92,7 +92,7 @@ export const FieldsSelector = () => {
           Project Efforts
         </Toggle>
         <Toggle
-          className="flex justify-evenly gap-1 hover:text-black"
+          className="flex justify-evenly gap-1 data-[state=on]:text-[#5B5FC7]"
           variant={"outline"}
           value="Submission Date"
           onClick={() => handleToggle("Submission Date")}
@@ -102,9 +102,9 @@ export const FieldsSelector = () => {
           Submission Date
         </Toggle>
       </ToggleGroup>
-      <ToggleGroup type="single" className="p-1">
+      <ToggleGroup type="single" className="p-1 gap-2">
         <Toggle
-          className="flex justify-evenly gap-1 hover:text-black"
+          className="flex justify-evenly gap-1 data-[state=on]:text-[#5B5FC7]"
           variant={"outline"}
           value="Delivery Model"
           onClick={() => handleToggle("Delivery Model")}
@@ -114,7 +114,7 @@ export const FieldsSelector = () => {
           Delivery Model
         </Toggle>
         <Toggle
-          className="flex justify-evenly gap-1 hover:text-black"
+          className="flex justify-evenly gap-1 data-[state=on]:text-[#5B5FC7]"
           variant={"outline"}
           value="Employee Count"
           onClick={() => handleToggle("Employee Count")}
@@ -124,7 +124,7 @@ export const FieldsSelector = () => {
           Employee Count
         </Toggle>
         <Toggle
-          className="flex justify-evenly gap-1 hover:text-black"
+          className="flex justify-evenly gap-1 data-[state=on]:text-[#5B5FC7]"
           variant={"outline"}
           value="Rating"
           onClick={() => handleToggle("Rating")}
@@ -134,7 +134,7 @@ export const FieldsSelector = () => {
           Rating
         </Toggle>
         <Toggle
-          className="flex justify-evenly gap-1 hover:text-black"
+          className="flex justify-evenly gap-1 data-[state=on]:text-[#5B5FC7]"
           variant={"outline"}
           value="Company Info"
           onClick={() => handleToggle("Company Info")}
@@ -144,7 +144,7 @@ export const FieldsSelector = () => {
           Company Info
         </Toggle>
         <Toggle
-          className="flex justify-evenly gap-1 hover:text-black"
+          className="flex justify-evenly gap-1 data-[state=on]:text-[#5B5FC7]"
           variant={"outline"}
           value="Milestone"
           onClick={() => handleToggle("Milestone")}
@@ -154,7 +154,7 @@ export const FieldsSelector = () => {
           Milestone
         </Toggle>
         <Toggle
-          className="flex justify-evenly gap-1 hover:text-black"
+          className="flex justify-evenly gap-1 data-[state=on]:text-[#5B5FC7]"
           variant={"outline"}
           value="Location"
           onClick={() => handleToggle("Location")}

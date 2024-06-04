@@ -17,11 +17,11 @@ export const Route = createFileRoute("/_protected")({
 
 function ProtectedLayout() {
   return (
-    <div className="flex flex-col w-full bg-hero-rain dark:bg-hero-rain-dark">
+    <div className="flex flex-col w-full bg-hero-topography dark:bg-hero-topography-dark">
       <div className="flex justify-start">
         <Navbar />
       </div>
-      <Card className="flex items-center justify-center h-full m-10 mt-24">
+      <Card className="flex items-center justify-center h-full m-8 mt-20">
         <Outlet />
       </Card>
       <div className="flex justify-end">

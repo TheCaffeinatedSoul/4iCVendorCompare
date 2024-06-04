@@ -20,6 +20,7 @@ import { FieldsSelector } from "@/components/fields-selector";
 import { useSelector } from "react-redux";
 import { fieldSelector } from "@/redux/features/fields/fieldSlice";
 import { IoOpenOutline, IoClose } from "react-icons/io5";
+import { Card } from "@/components/ui/card";
 
 export const Route = createFileRoute("/_protected/compare/")({
   component: Compare,
@@ -51,14 +52,13 @@ function Compare() {
   return (
     <div className="container p-10 pt-5">
       <div className="py-5">
-        <TableHead className="text-2xl pb-4">COMPARE</TableHead>
         <FieldsSelector />
       </div>
       <Table>
         <TableHeader>
           <TableRow>
             <TableHead>Vendor Name</TableHead>
-            <TableCell>
+            <TableCell className="text-[#263238] dark:text-white">
               <Select onValueChange={(value) => handleSelect("vendor1", value)}>
                 <SelectTrigger>
                   <SelectValue placeholder="-- Select Vendor --" />
@@ -75,7 +75,7 @@ function Compare() {
                 </SelectContent>
               </Select>
             </TableCell>
-            <TableCell>
+            <TableCell className="text-[#263238] dark:text-white">
               <Select onValueChange={(value) => handleSelect("vendor2", value)}>
                 <SelectTrigger>
                   <SelectValue placeholder="-- Select Vendor --" />
@@ -92,7 +92,7 @@ function Compare() {
                 </SelectContent>
               </Select>
             </TableCell>
-            <TableCell>
+            <TableCell className="text-[#263238] dark:text-white">
               <Select onValueChange={(value) => handleSelect("vendor3", value)}>
                 <SelectTrigger>
                   <SelectValue placeholder="-- Select Vendor --" />
@@ -114,7 +114,7 @@ function Compare() {
         <TableBody>
           <TableRow>
             <TableHead></TableHead>
-            <TableCell>
+            <TableCell className="text-[#263238] dark:text-white">
               <div className="flex flex-col items-center justify-center min-h-[20vh]">
                 {vendor1Details ? (
                   <div className="flex flex-col w-full items-center gap-2">
@@ -154,7 +154,7 @@ function Compare() {
                 )}
               </div>
             </TableCell>
-            <TableCell>
+            <TableCell className="text-[#263238] dark:text-white">
               <div className="flex flex-col items-center justify-center min-h-[20vh]">
                 {vendor2Details ? (
                   <div className="flex flex-col w-full items-center gap-2">
@@ -194,7 +194,7 @@ function Compare() {
                 )}
               </div>
             </TableCell>
-            <TableCell>
+            <TableCell className="text-[#263238] dark:text-white">
               <div className="flex flex-col items-center justify-center min-h-[20vh]">
                 {vendor3Details ? (
                   <div className="flex flex-col w-full items-center gap-2">
@@ -238,89 +238,204 @@ function Compare() {
           {fields.companyStrength && (
             <TableRow>
               <TableHead>Company Strength</TableHead>
-              <TableCell>{vendor1Details?.companyStrength || "N/A"}</TableCell>
-              <TableCell>{vendor2Details?.companyStrength || "N/A"}</TableCell>
-              <TableCell>{vendor3Details?.companyStrength || "N/A"}</TableCell>
+              <TableCell className="text-[#263238] dark:text-white">
+                {vendor1Details?.companyStrength || "N/A"}
+              </TableCell>
+              <TableCell className="text-[#263238] dark:text-white">
+                {vendor2Details?.companyStrength || "N/A"}
+              </TableCell>
+              <TableCell className="text-[#263238] dark:text-white">
+                {vendor3Details?.companyStrength || "N/A"}
+              </TableCell>
             </TableRow>
           )}
           {fields.fieldExp && (
             <TableRow>
               <TableHead>Experience in the Field</TableHead>
-              <TableCell>{vendor1Details?.fieldExp || "N/A"}</TableCell>
-              <TableCell>{vendor2Details?.fieldExp || "N/A"}</TableCell>
-              <TableCell>{vendor3Details?.fieldExp || "N/A"}</TableCell>
+              <TableCell className="text-[#263238] dark:text-white">
+                {vendor1Details?.fieldExp || "N/A"}
+              </TableCell>
+              <TableCell className="text-[#263238] dark:text-white">
+                {vendor2Details?.fieldExp || "N/A"}
+              </TableCell>
+              <TableCell className="text-[#263238] dark:text-white">
+                {vendor3Details?.fieldExp || "N/A"}
+              </TableCell>
             </TableRow>
           )}
           {fields.revUSD && (
             <TableRow>
               <TableHead>Commercials in USD</TableHead>
-              <TableCell>{vendor1Details?.revUSD || "N/A"}</TableCell>
-              <TableCell>{vendor2Details?.revUSD || "N/A"}</TableCell>
-              <TableCell>{vendor3Details?.revUSD || "N/A"}</TableCell>
+              {[vendor1Details, vendor2Details, vendor3Details].map(
+                (vendor, index) => {
+                  const revUSD = vendor?.revUSD ? vendor.revUSD : 0;
+                  const isLowest =
+                    revUSD ===
+                    Math.min(
+                      vendor1Details?.revUSD ? vendor1Details.revUSD : 0,
+                      vendor2Details?.revUSD ? vendor2Details.revUSD : 0,
+                      vendor3Details?.revUSD ? vendor3Details.revUSD : 0
+                    );
+                  return (
+                    <TableCell key={index}>
+                      {isLowest ? (
+                        <Card
+                          className={`flex p-2 shadow-none w-fit text-[#263238] dark:text-white ${
+                            isLowest
+                              ? "bg-yellow-100 dark:text-black font-bold"
+                              : ""
+                          }`}
+                        >
+                          {vendor?.revUSD || "N/A"}
+                        </Card>
+                      ) : (
+                        <div> {vendor?.revUSD || "N/A"}</div>
+                      )}
+                    </TableCell>
+                  );
+                }
+              )}
             </TableRow>
           )}
           {fields.projDuration && (
             <TableRow>
               <TableHead>Project Duration</TableHead>
-              <TableCell>{vendor1Details?.projDuration || "N/A"}</TableCell>
-              <TableCell>{vendor2Details?.projDuration || "N/A"}</TableCell>
-              <TableCell>{vendor3Details?.projDuration || "N/A"}</TableCell>
+              {[vendor1Details, vendor2Details, vendor3Details].map(
+                (vendor, index) => {
+                  const projDuration = vendor?.projDuration
+                    ? parseInt(vendor.projDuration.split(" ")[0])
+                    : Infinity;
+                  const minDuration = Math.min(
+                    vendor1Details?.projDuration
+                      ? parseInt(vendor1Details.projDuration.split(" ")[0])
+                      : Infinity,
+                    vendor2Details?.projDuration
+                      ? parseInt(vendor2Details.projDuration.split(" ")[0])
+                      : Infinity,
+                    vendor3Details?.projDuration
+                      ? parseInt(vendor3Details.projDuration.split(" ")[0])
+                      : Infinity
+                  );
+                  const isLowest = projDuration === minDuration;
+
+                  return (
+                    <TableCell key={index}>
+                      {isLowest ? (
+                        <Card
+                          className={`flex p-2 shadow-none w-fit text-[#263238] dark:text-white ${
+                            isLowest
+                              ? "bg-yellow-100 dark:text-black font-bold"
+                              : ""
+                          }`}
+                        >
+                          {vendor?.projDuration || "N/A"}
+                        </Card>
+                      ) : (
+                        <div>{vendor?.projDuration || "N/A"}</div>
+                      )}
+                    </TableCell>
+                  );
+                }
+              )}
             </TableRow>
           )}
+
           {fields.projEfforts && (
             <TableRow>
               <TableHead>Project Efforts</TableHead>
-              <TableCell>{vendor1Details?.projEfforts || "N/A"}</TableCell>
-              <TableCell>{vendor2Details?.projEfforts || "N/A"}</TableCell>
-              <TableCell>{vendor3Details?.projEfforts || "N/A"}</TableCell>
+              <TableCell className="text-[#263238] dark:text-white">
+                {vendor1Details?.projEfforts || "N/A"}
+              </TableCell>
+              <TableCell className="text-[#263238] dark:text-white">
+                {vendor2Details?.projEfforts || "N/A"}
+              </TableCell>
+              <TableCell className="text-[#263238] dark:text-white">
+                {vendor3Details?.projEfforts || "N/A"}
+              </TableCell>
             </TableRow>
           )}
           {fields.subDate && (
             <TableRow>
               <TableHead>Submission Date</TableHead>
-              <TableCell>{vendor1Details?.subDate || "N/A"}</TableCell>
-              <TableCell>{vendor2Details?.subDate || "N/A"}</TableCell>
-              <TableCell>{vendor3Details?.subDate || "N/A"}</TableCell>
+              <TableCell className="text-[#263238] dark:text-white">
+                {vendor1Details?.subDate || "N/A"}
+              </TableCell>
+              <TableCell className="text-[#263238] dark:text-white">
+                {vendor2Details?.subDate || "N/A"}
+              </TableCell>
+              <TableCell className="text-[#263238] dark:text-white">
+                {vendor3Details?.subDate || "N/A"}
+              </TableCell>
             </TableRow>
           )}
           {fields.delModel && (
             <TableRow>
               <TableHead>Delivery Model</TableHead>
-              <TableCell>{vendor1Details?.delModel || "N/A"}</TableCell>
-              <TableCell>{vendor2Details?.delModel || "N/A"}</TableCell>
-              <TableCell>{vendor3Details?.delModel || "N/A"}</TableCell>
+              <TableCell className="text-[#263238] dark:text-white">
+                {vendor1Details?.delModel || "N/A"}
+              </TableCell>
+              <TableCell className="text-[#263238] dark:text-white">
+                {vendor2Details?.delModel || "N/A"}
+              </TableCell>
+              <TableCell className="text-[#263238] dark:text-white">
+                {vendor3Details?.delModel || "N/A"}
+              </TableCell>
             </TableRow>
           )}
           {fields.rating && (
             <TableRow>
               <TableHead>Rating</TableHead>
-              <TableCell>{vendor1Details?.rating || "N/A"}</TableCell>
-              <TableCell>{vendor2Details?.rating || "N/A"}</TableCell>
-              <TableCell>{vendor3Details?.rating || "N/A"}</TableCell>
+              <TableCell className="text-[#263238] dark:text-white">
+                {vendor1Details?.rating || "N/A"}
+              </TableCell>
+              <TableCell className="text-[#263238] dark:text-white">
+                {vendor2Details?.rating || "N/A"}
+              </TableCell>
+              <TableCell className="text-[#263238] dark:text-white">
+                {vendor3Details?.rating || "N/A"}
+              </TableCell>
             </TableRow>
           )}
           {fields.about && (
             <TableRow>
               <TableHead>Company Info</TableHead>
-              <TableCell>{vendor1Details?.about || "N/A"}</TableCell>
-              <TableCell>{vendor2Details?.about || "N/A"}</TableCell>
-              <TableCell>{vendor3Details?.about || "N/A"}</TableCell>
+              <TableCell className="text-[#263238] dark:text-white">
+                {vendor1Details?.about || "N/A"}
+              </TableCell>
+              <TableCell className="text-[#263238] dark:text-white">
+                {vendor2Details?.about || "N/A"}
+              </TableCell>
+              <TableCell className="text-[#263238] dark:text-white">
+                {vendor3Details?.about || "N/A"}
+              </TableCell>
             </TableRow>
           )}
           {fields.milestone && (
             <TableRow>
               <TableHead>Milestone</TableHead>
-              <TableCell>{vendor1Details?.milestone || "N/A"}</TableCell>
-              <TableCell>{vendor2Details?.milestone || "N/A"}</TableCell>
-              <TableCell>{vendor3Details?.milestone || "N/A"}</TableCell>
+              <TableCell className="text-[#263238] dark:text-white">
+                {vendor1Details?.milestone || "N/A"}
+              </TableCell>
+              <TableCell className="text-[#263238] dark:text-white">
+                {vendor2Details?.milestone || "N/A"}
+              </TableCell>
+              <TableCell className="text-[#263238] dark:text-white">
+                {vendor3Details?.milestone || "N/A"}
+              </TableCell>
             </TableRow>
           )}
           {fields.location && (
             <TableRow>
               <TableHead>Location</TableHead>
-              <TableCell>{vendor1Details?.location || "N/A"}</TableCell>
-              <TableCell>{vendor2Details?.location || "N/A"}</TableCell>
-              <TableCell>{vendor3Details?.location || "N/A"}</TableCell>
+              <TableCell className="text-[#263238] dark:text-white">
+                {vendor1Details?.location || "N/A"}
+              </TableCell>
+              <TableCell className="text-[#263238] dark:text-white">
+                {vendor2Details?.location || "N/A"}
+              </TableCell>
+              <TableCell className="text-[#263238] dark:text-white">
+                {vendor3Details?.location || "N/A"}
+              </TableCell>
             </TableRow>
           )}
         </TableBody>

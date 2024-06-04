@@ -29,7 +29,7 @@ export const Navbar = () => {
         className="cursor-pointer"
       />
       <b>AI Procurement Evaluation</b>
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2">
         <Searchbar />
         <div>
           <DarkModeToggle />
